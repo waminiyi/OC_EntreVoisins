@@ -38,4 +38,19 @@ public abstract class DummyNeighbourGenerator {
     static List<Neighbour> generateNeighbours() {
         return new ArrayList<>(DUMMY_NEIGHBOURS);
     }
+
+    public  static  List<Neighbour> FAVORITES_NEIGHBOURS = new ArrayList<>();
+
+    public static List<Neighbour> getFavoritesNeighbours(){
+        return FAVORITES_NEIGHBOURS;
+    }
+
+    public  static void addToFavorites (Neighbour neighbour){
+        FAVORITES_NEIGHBOURS.add(neighbour);
+    }
+
+    public static void removeFromFavorites (Neighbour neighbour){
+        FAVORITES_NEIGHBOURS.remove(neighbour);
+    }
+
 }

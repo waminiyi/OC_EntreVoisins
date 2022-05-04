@@ -26,7 +26,9 @@ public class NeighbourFragment extends Fragment {
 
     private NeighbourApiService mApiService;
     private List<Neighbour> mNeighbours;
+    private List<Neighbour> mFavorites;
     private RecyclerView mRecyclerView;
+    private int instance;
 
 
     /**
@@ -35,6 +37,13 @@ public class NeighbourFragment extends Fragment {
      */
     public static NeighbourFragment newInstance() {
         NeighbourFragment fragment = new NeighbourFragment();
+        fragment.instance=0;
+        return fragment;
+    }
+
+    public static NeighbourFragment favoriteInstance() {
+        NeighbourFragment fragment = new NeighbourFragment();
+        fragment.instance=1;
         return fragment;
     }
 
@@ -59,8 +68,14 @@ public class NeighbourFragment extends Fragment {
      * Init the List of neighbours
      */
     private void initList() {
-        mNeighbours = mApiService.getNeighbours();
-        mRecyclerView.setAdapter(new MyNeighbourRecyclerViewAdapter( this.getActivity(), mNeighbours));
+        if (instance==0){
+            mNeighbours = mApiService.getNeighbours();
+            mRecyclerView.setAdapter(new MyNeighbourRecyclerViewAdapter( this.getActivity(), mNeighbours));
+        }else{
+            mFavorites=mApiService.getFavoritesNeighbours();
+            mRecyclerView.setAdapter(new MyNeighbourRecyclerViewAdapter( this.getActivity(), mFavorites));
+        }
+
     }
 
     @Override
@@ -87,7 +102,14 @@ public class NeighbourFragment extends Fragment {
      */
     @Subscribe
     public void onDeleteNeighbour(DeleteNeighbourEvent event) {
-        mApiService.deleteNeighbour(event.neighbour);
+
+        if (instance==0){
+            mApiService.deleteNeighbour(event.neighbour);
+        }else{
+            mApiService.deleteFromFavorites(event.neighbour);
+        }
+
         initList();
     }
+
 }

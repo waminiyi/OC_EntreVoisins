@@ -10,9 +10,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.openclassrooms.entrevoisins.service.NeighbourApiService;
 import com.squareup.picasso.Picasso;
 
 import com.openclassrooms.entrevoisins.R;
@@ -52,6 +54,8 @@ public class NeighbourDetailsActivity extends AppCompatActivity {
     private String address;
     private String phoneNumber;
     private String description;
+    private NeighbourApiService mApiService;
+    private Neighbour mNeighbour;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +80,13 @@ public class NeighbourDetailsActivity extends AppCompatActivity {
             updateDetails();
         }
 
+        addToFavouritesFAB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
     }
 
     //méthode qui détruit l'activity et retourne sur la liste lorqu'on appuie le bouton retour
@@ -91,7 +102,7 @@ public class NeighbourDetailsActivity extends AppCompatActivity {
 
         nameOnPhotoTextView.setText(name);
         nameTextView.setText(name);
-        aboutTextView.setText(address);
+        adressTextView.setText(address);
         phoneTextView.setText(phoneNumber);
         descriptionTextView.setText(description);
         aboutTextView.setText("A propos de moi");
