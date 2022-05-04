@@ -37,8 +37,28 @@ public class ListNeighbourActivity extends AppCompatActivity {
         setSupportActionBar(mToolbar);
         mPagerAdapter = new ListNeighbourPagerAdapter(getSupportFragmentManager());
         mViewPager.setAdapter(mPagerAdapter);
-        mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTabLayout));
-        mTabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
+        mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTabLayout) {
+
+            /**
+             * Here
+             * @param position
+             */
+                                               @Override
+                                               public void onPageSelected(int position) {
+                                                   super.onPageSelected(position);
+                                                   NeighbourFragment.setCurrentPosition(position);
+                                               }
+                                           }
+        );
+        mTabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager) {
+                                                @Override
+                                                public void onTabSelected(TabLayout.Tab tab) {
+                                                    super.onTabSelected(tab);
+                                                    NeighbourFragment.setCurrentPosition(tab.getPosition());
+                                                }
+                                            }
+        );
+
 
     }
 

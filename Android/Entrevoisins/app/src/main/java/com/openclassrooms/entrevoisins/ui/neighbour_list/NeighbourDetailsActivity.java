@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.openclassrooms.entrevoisins.di.DI;
 import com.openclassrooms.entrevoisins.service.NeighbourApiService;
 import com.squareup.picasso.Picasso;
 
@@ -49,11 +50,7 @@ public class NeighbourDetailsActivity extends AppCompatActivity {
     @BindView(R.id.details_activity_profile_image)
     ImageView profileImageView;
 
-    private String name;
-    private String avatarUrl;
-    private String address;
-    private String phoneNumber;
-    private String description;
+
     private NeighbourApiService mApiService;
     private Neighbour mNeighbour;
 
@@ -67,15 +64,11 @@ public class NeighbourDetailsActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        Intent infosIntent = getIntent();
-        Bundle bundle = infosIntent.getExtras();
-        if (bundle != null) {
+        mApiService = DI.getNeighbourApiService();
 
-            name = bundle.getString("name");
-            avatarUrl = bundle.getString("avatarUrl");
-            address = bundle.getString("address");
-            phoneNumber = bundle.getString("phoneNumber");
-            description = bundle.getString("description");
+        Intent infosIntent = getIntent();
+        mNeighbour = infosIntent.getParcelableExtra("neighbour");
+        if (mNeighbour != null) {
 
             updateDetails();
         }
@@ -83,7 +76,7 @@ public class NeighbourDetailsActivity extends AppCompatActivity {
         addToFavouritesFAB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                mApiService.addToFavorites(mNeighbour);
             }
         });
 
@@ -100,27 +93,21 @@ public class NeighbourDetailsActivity extends AppCompatActivity {
 
     private void updateDetails() {
 
-        nameOnPhotoTextView.setText(name);
-        nameTextView.setText(name);
-        adressTextView.setText(address);
-        phoneTextView.setText(phoneNumber);
-        descriptionTextView.setText(description);
+        nameOnPhotoTextView.setText(mNeighbour.getName());
+        nameTextView.setText(mNeighbour.getName());
+        adressTextView.setText(mNeighbour.getAddress());
+        phoneTextView.setText(mNeighbour.getPhoneNumber());
+        descriptionTextView.setText(mNeighbour.getAboutMe());
         aboutTextView.setText("A propos de moi");
 
         Picasso.get()
-                .load(avatarUrl)
+                .load(mNeighbour.getAvatarUrl())
                 .into(profileImageView);
     }
 
     public static void openDetailsActivity(FragmentActivity activity, Neighbour neighbour) {
         Intent intent = new Intent(activity, NeighbourDetailsActivity.class);
-
-        intent.putExtra("id", neighbour.getId());
-        intent.putExtra("name", neighbour.getName());
-        intent.putExtra("avatarUrl", neighbour.getAvatarUrl());
-        intent.putExtra("address", neighbour.getAddress());
-        intent.putExtra("phoneNumber", neighbour.getPhoneNumber());
-        intent.putExtra("description", neighbour.getAboutMe());
+        intent.putExtra("neighbour", neighbour);
 
         ActivityCompat.startActivity(activity, intent, null);
     }
