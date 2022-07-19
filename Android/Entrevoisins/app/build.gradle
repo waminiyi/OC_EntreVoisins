@@ -21,6 +21,7 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    
 }
 
 dependencies {
@@ -32,6 +33,9 @@ dependencies {
     implementation 'com.android.support:recyclerview-v7:28.0.0'
 
     implementation 'com.jakewharton:butterknife:9.0.0'
+    androidTestImplementation project(path: ':app')
+    androidTestImplementation project(path: ':app')
+    androidTestImplementation project(path: ':app')
     annotationProcessor 'com.jakewharton:butterknife-compiler:9.0.0'
 
     implementation 'com.squareup.picasso:picasso:2.71828'
@@ -45,8 +49,9 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.hamcrest:java-hamcrest:2.0.0.0'
     // INSTRUMENTATION TEST
-    androidTestImplementation 'com.android.support.test:rules:1.4.0'
+    androidTestImplementation 'com.android.support.test:rules:1.0.2'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-contrib:3.0.2'
+
 }
