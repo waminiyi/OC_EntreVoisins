@@ -1,50 +1,16 @@
 # A propos
 
  **Entrevoisins** est une application qui permet de faciliter l'entraide entre voisins. Les fonctionnalités principales sont:
- * lister les voisins
+* lister les voisins
 * ajouter un voisin
 * supprimer un voisin
 * ajouter un voisin aux favoris
 
-# Compilation
-```
-  compileSdkVersion 28    
-  minSdkVersion 21 
-  testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"    
-  sourceCompatibility JavaVersion.VERSION_1_8  
-  targetCompatibility JavaVersion.VERSION_1_8  
-  ```
-
-
-# Dépendances
-```
-  implementation fileTree(dir: 'libs', include: ['*.jar'])  
-  implementation 'com.android.support:appcompat-v7:28.0.0'  
-  implementation 'com.android.support:design:28.0.0'  
-  implementation 'com.android.support.constraint:constraint-layout:1.1.3'  
-  implementation 'com.android.support:support-v4:28.0.0'  
-  implementation 'com.android.support:recyclerview-v7:28.0.0'  
-  
-  implementation 'com.jakewharton:butterknife:9.0.0'  
-  androidTestImplementation project(path: ':app')  
-  androidTestImplementation project(path: ':app')  
-  androidTestImplementation project(path: ':app')  
-  annotationProcessor 'com.jakewharton:butterknife-compiler:9.0.0'  
-  
-  implementation 'com.squareup.picasso:picasso:2.71828'  
-  implementation 'com.github.bumptech.glide:glide:4.9.0'  
-  annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'  
-  
-  // EVENT BUS  
-  implementation 'org.greenrobot:eventbus:3.1.1'  
-  
-  // UNIT TEST  
-  testImplementation 'junit:junit:4.12'  
-  testImplementation 'org.hamcrest:java-hamcrest:2.0.0.0'  
-  
-  // INSTRUMENTATION TEST  
-  androidTestImplementation 'com.android.support.test:rules:1.0.2'  
-  androidTestImplementation 'com.android.support.test:runner:1.0.2'  
-  androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'  
-  androidTestImplementation 'com.android.support.test.espresso:espresso-contrib:3.0.2'  
-  ```
+# Compilation et exécution
+Pour compiler et exécuter la présente application, il faut:
+* lancer **Android Studio**,
+* importer le projet,
+* attendre que la synchronisation gradle se termine,
+* lancer l'application soit en cliquant sur le button triangulaire vert (Run 'app') sur la barre d'outils, soit en utilisant le 
+  raccourci clavier **Maj + F10**
+ 
